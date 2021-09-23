@@ -19,7 +19,7 @@ class Book(models.Model):
     title = models.CharField(max_length=200)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     description = models.TextField()
-    category = models.ForeignKey(Genre, on_delete=models.CASCADE)
+    genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
     completed = models.BooleanField(default=False)
     purchase_date = models.DateTimeField()
 
