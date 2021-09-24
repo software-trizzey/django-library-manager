@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
@@ -104,6 +106,14 @@ function Form() {
 						variant="outlined"
 						onChange={handleChange}
 					/>
+				</Grid>
+				<Grid item xs={12}>
+					<Button variant="contained" sx={{ marginRight: 2 }}>
+						Submit
+					</Button>
+					<Button variant="outlined" endIcon={<PhotoCamera />}>
+						Delete
+					</Button>
 				</Grid>
 			</Grid>
 		</Box>
