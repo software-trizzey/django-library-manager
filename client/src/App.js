@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { getBooks } from "./api/index";
 
 import BookShelf from "./components/book_shelf/book_shelf.component";
 import Form from "./components/form/form.component";
@@ -11,16 +11,13 @@ import Typography from "@mui/material/Typography";
 function App() {
 	const [books, setBooks] = useState([]);
 
+	const fetchBooks = async () => {
+		const data = await getBooks();
+		await setBooks(data);
+	};
+
 	useEffect(() => {
-		const fetchData = async (url) => {
-			try {
-				const { data } = await axios.get(url);
-				setBooks(data);
-			} catch (error) {
-				console.log(error);
-			}
-		};
-		fetchData("api/books");
+		fetchBooks();
 	}, []);
 
 	return (
@@ -39,7 +36,6 @@ function App() {
 					</Typography>
 				</Grid>
 				<Grid item xs={12}>
-					{console.log(books)}
 					<BookShelf books={books} />
 				</Grid>
 				<Grid item xs={8}>

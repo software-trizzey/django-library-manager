@@ -11,7 +11,7 @@ function BookShelf({ books }) {
 			{books.length > 0 ? (
 				books.map((book, idx) => (
 					<Grid key={idx} item xs={12} md={4}>
-						<Book book={book} />
+						<Book key={book.id} book={book} />
 					</Grid>
 				))
 			) : (

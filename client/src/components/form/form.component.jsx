@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import { createBook } from "../../api/index";
+
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
@@ -20,15 +22,20 @@ function Form() {
 		completed: false,
 	});
 
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+
+		const response = await createBook(bookData);
+		console.log(response);
+	};
+
 	const handleChange = (e) => {
 		const { name, value } = e.target;
-
 		// Handle checkbox
 		if (!value) {
 			setBookData({ ...bookData, [name]: e.target.checked });
 			return;
 		}
-
 		setBookData({ ...bookData, [name]: value });
 	};
 
@@ -41,7 +48,7 @@ function Form() {
 			<Grid container spacing={4}>
 				<Grid item xs={12}>
 					<Typography component="h2" variant="h5">
-						Add New book
+						Add Book
 					</Typography>
 				</Grid>
 				{/* Title */}
@@ -86,6 +93,7 @@ function Form() {
 						<FormControlLabel
 							control={
 								<Checkbox
+									name="completed"
 									onChange={handleChange}
 									inputProps={{ "aria-label": "controlled" }}
 								/>
@@ -108,11 +116,16 @@ function Form() {
 					/>
 				</Grid>
 				<Grid item xs={12}>
-					<Button variant="contained" sx={{ marginRight: 2 }}>
-						Submit
+					<Button
+						type="submit"
+						variant="contained"
+						sx={{ marginRight: 2 }}
+						onClick={handleSubmit}
+					>
+						Add Book
 					</Button>
 					<Button variant="outlined" endIcon={<PhotoCamera />}>
-						Delete
+						Upload Cover Art
 					</Button>
 				</Grid>
 			</Grid>
