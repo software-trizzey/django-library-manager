@@ -1,5 +1,12 @@
 # Version History
 
+**Version 0.0.3:**
+
+Created a basic client UI with React.js.
+
+As of now, the client will fetch all books that're currently being stored in the
+Django database.
+
 **Version 0.0.2:**
 
 Implemented a REST API with the Django Rest Framework. I used their
