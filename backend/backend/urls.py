@@ -19,6 +19,9 @@ from rest_framework import routers
 
 from library import views
 
+admin.site.site_header = 'Library Manager'
+admin.site.index_title = 'Home'
+
 router = routers.DefaultRouter()
 router.register(r'authors', views.AuthorViewSet)
 router.register(r'genres', views.GenreViewSet)
