@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { updateBook, deleteBook } from "../../api/index";
+import React, { useState, useEffect } from "react";
+import { updateBook, deleteBook, getAuthor, getGenre } from "../../api/index";
 
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
@@ -17,8 +17,6 @@ import Typography from "@mui/material/Typography";
 function Book({ book }) {
 	const [newBook, setNewBook] = useState(book);
 	const [open, setOpen] = useState(false);
-
-	const author = book.firstName + " " + book.lastName;
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -38,6 +36,38 @@ function Book({ book }) {
 		setOpen(false);
 	};
 
+	const fetchData = async (book) => {
+		const { first_name, last_name } = await getAuthor(book.author);
+		const firstName = first_name;
+		const lastName = last_name;
+		const { name } = await getGenre(book.genre);
+		const genre = name;
+		setNewBook({
+			...newBook,
+			firstName,
+			lastName,
+			genre,
+		});
+	};
+
+	const fetchAuthor = async (book) => {
+		const { first_name, last_name } = await getAuthor(book.author);
+		const firstName = first_name;
+		const lastName = last_name;
+		setNewBook({
+			...newBook,
+			firstName,
+			lastName,
+		});
+	};
+	const fetchGenre = async (book) => {
+		const { name } = await getGenre(book.genre);
+		setNewBook({
+			...newBook,
+			genre: name,
+		});
+	};
+
 	const handleUpdate = async () => {
 		await updateBook();
 		handleClose();
@@ -48,10 +78,16 @@ function Book({ book }) {
 		handleClose();
 	};
 
+	useEffect(() => {
+		fetchData(book);
+	}, [book]);
+
 	return (
 		<div style={{ border: "1px solid black", padding: "18px" }}>
 			<Typography variant="body2">{newBook.title}</Typography>
-			<Typography variant="body2">{author}</Typography>
+			<Typography variant="body2">
+				{newBook.firstName} {newBook.lastName}
+			</Typography>
 			<Typography variant="body2">{newBook.genre}</Typography>
 			<Typography variant="body2">{newBook.completed}</Typography>
 			<Typography variant="body2">{newBook.description}</Typography>

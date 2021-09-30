@@ -5,7 +5,6 @@ axios.defaults.baseURL = "api/";
 export const getAuthors = async () => {
 	try {
 		const { data } = await axios.get("authors");
-		console.log(data);
 	} catch (error) {
 		console.log(error);
 	}
@@ -14,7 +13,7 @@ export const getAuthors = async () => {
 export const getAuthor = async (id) => {
 	try {
 		const { data } = await axios.get(`authors/${id}`);
-		console.log(data);
+		return data;
 	} catch (error) {
 		console.log(error);
 	}
@@ -32,7 +31,7 @@ export const getGenres = async () => {
 export const getGenre = async (id) => {
 	try {
 		const { data } = await axios.get(`genres/${id}`);
-		console.log(data);
+		return data;
 	} catch (error) {
 		console.log(error);
 	}
