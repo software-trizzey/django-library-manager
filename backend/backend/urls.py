@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
-from library import views
+from library import views, urls
 
 admin.site.site_header = 'Library Manager'
 admin.site.index_title = 'Home'
@@ -29,6 +29,7 @@ router.register(r'books', views.BookViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls))
+    path('api/', include(router.urls)),
+    path('', include(urls))
     
 ]

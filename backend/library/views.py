@@ -1,7 +1,12 @@
+from django.http import HttpResponse
 from rest_framework import viewsets
 from .serializers import AuthorSerializer, BookSerializer, GenreSerializer
 
 from .models import Author, Book, Genre
+
+
+def home(request):
+    return HttpResponse("Hello from your favorite server!")
 
 class AuthorViewSet(viewsets.ModelViewSet):
     """
