@@ -50,24 +50,6 @@ function Book({ book }) {
 		});
 	};
 
-	const fetchAuthor = async (book) => {
-		const { first_name, last_name } = await getAuthor(book.author);
-		const firstName = first_name;
-		const lastName = last_name;
-		setNewBook({
-			...newBook,
-			firstName,
-			lastName,
-		});
-	};
-	const fetchGenre = async (book) => {
-		const { name } = await getGenre(book.genre);
-		setNewBook({
-			...newBook,
-			genre: name,
-		});
-	};
-
 	const handleUpdate = async () => {
 		await updateBook();
 		handleClose();
